@@ -7,12 +7,16 @@ package modelo;
 
 import javax.persistence.Entity;
 
+
 @Entity
-public class Galinha extends Animal{
+public class Galinha extends Animal {
     
     private boolean angola=false;
     private boolean botaOvo=true;
 
+    public Galinha(){
+    
+    }
     public boolean isAngola() {
         return angola;
     }

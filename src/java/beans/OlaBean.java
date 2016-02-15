@@ -1,13 +1,19 @@
 package beans;
 
 import dao.CachorroDAO;
+import java.util.Random;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.inject.Inject;
 import modelo.Cachorro;
 
 @ManagedBean(name = "hbean")
 @SessionScoped
 public class OlaBean {
+    
+    
+    @Inject
+    private CachorroDAO cdao;
     
     private String textoEntrada;
     private String textoSaida="Valor Padrão Inicial" ;
@@ -31,18 +37,29 @@ public class OlaBean {
     
     public void salvarCachorro(){
         
-        CachorroDAO cDAO = new CachorroDAO();
+        Random randomGenerator = new Random();
         
         Cachorro c = new Cachorro();
+        
         c.setDono("Adailton");
-        c.setIdade(2);
-        c.setLateMuito(true);
-        c.setRaca("viraLata");
+        c.setIdade(randomGenerator.nextInt());// gera uma idade aleatoria
+        c.setLateMuito(false);
+        c.setRaca("viraLata + "+System.currentTimeMillis());
         
-        cDAO.inserir(c);
+        cdao.inserir(c);
         
-        cDAO.remover(c);
+        //cdao.remover(c);
         
         
     }
+
+    public CachorroDAO getCdao() {
+        return cdao;
+    }
+
+    public void setCdao(CachorroDAO cdao) {
+        this.cdao = cdao;
+    }
+    
+    
 }

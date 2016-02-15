@@ -1,16 +1,10 @@
 package dao;
 
+import javax.ejb.Stateless;
 import modelo.Animal;
 import repositorio.RepositorioImpl;
 
-@Deprecated
-/**
- * REQUISO = 1, 2
- * andjkaendkjaendake
- * daedjkaenjkdaed
- * aedknaelmkea
- */
- 
+@Stateless
 public class AnimalDAO extends RepositorioImpl<Animal> {
     
 

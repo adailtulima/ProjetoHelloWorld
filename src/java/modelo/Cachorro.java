@@ -5,19 +5,25 @@
  */
 package modelo;
 
+
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+
 @Entity
-public class Cachorro extends Animal{
+public class Cachorro extends Animal {
 
   private boolean lateMuito;
   
   @OneToMany(mappedBy = "cachorro")
   private List<Vacina> vacinas;
 
+  public Cachorro(){
+        vacinas = new ArrayList<Vacina>();
+  }
+  
     public boolean isLateMuito() {
         return lateMuito;
     }
@@ -33,7 +39,6 @@ public class Cachorro extends Animal{
     public void setVacinas(List<Vacina> vacinas) {
         this.vacinas = vacinas;
     }
-  
-  
+    
     
 }

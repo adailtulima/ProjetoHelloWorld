@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -21,6 +22,7 @@ import javax.persistence.criteria.Root;
 public class RepositorioImpl<T> implements Repositorio<T> {
 
 	@Inject
+        @PersistenceContext(unitName = "ProjetoHelloWorldPU")
 	EntityManager entityManager;
 
 	protected HashMap<String, Object> parametros(Object... valores) {
@@ -34,9 +36,10 @@ public class RepositorioImpl<T> implements Repositorio<T> {
 		return parametros;
 	}
 
-	@Override
 	public void inserir(T entidade) {
-		entityManager.persist(entidade);
+            System.out.println("repositorio.RepositorioImpl.inserir()  entidade = "+entidade);
+            System.out.println("repositorio.RepositorioImpl.inserir()  eManager = "+entityManager);
+	    entityManager.persist(entidade);
 	}
 
 	@Override

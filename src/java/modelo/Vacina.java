@@ -6,6 +6,8 @@
 package modelo;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -13,13 +15,18 @@ import javax.persistence.ManyToOne;
 public class Vacina {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private TipoVacina tipo;
-    
+
     @ManyToOne
     private Cachorro cachorro;
-    
+
+    public Vacina() {
+
+    }
+
     public Long getId() {
         return id;
     }
@@ -27,5 +34,5 @@ public class Vacina {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
 }
