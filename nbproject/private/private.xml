@@ -3,11 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/adailtonlima/NetBeansProjects/ProjetoHelloWorld/src/java/repositorio/ProdutorEntityManager.java</file>
+            <file>file:/Users/adailtonlima/NetBeansProjects/ProjetoHelloWorld/web/cadastro_cachorro.xhtml</file>
+            <file>file:/Users/adailtonlima/NetBeansProjects/ProjetoHelloWorld/src/java/beans/AbstractMB.java</file>
             <file>file:/Users/adailtonlima/NetBeansProjects/ProjetoHelloWorld/src/java/repositorio/RepositorioImpl.java</file>
-            <file>file:/Users/adailtonlima/NetBeansProjects/ProjetoHelloWorld/nbproject/build-impl.xml</file>
-            <file>file:/Users/adailtonlima/NetBeansProjects/ProjetoHelloWorld/src/java/repositorio/Repositorio.java</file>
-            <file>file:/Users/adailtonlima/NetBeansProjects/ProjetoHelloWorld/web/META-INF/context.xml</file>
+            <file>file:/Users/adailtonlima/NetBeansProjects/ProjetoHelloWorld/src/java/modelo/Vacina.java</file>
+            <file>file:/Users/adailtonlima/NetBeansProjects/ProjetoHelloWorld/src/conf/persistence.xml</file>
+            <file>file:/Users/adailtonlima/NetBeansProjects/ProjetoHelloWorld/src/java/modelo/Cachorro.java</file>
+            <file>file:/Users/adailtonlima/NetBeansProjects/ProjetoHelloWorld/src/java/util/JSFMessageUtil.java</file>
+            <file>file:/Users/adailtonlima/NetBeansProjects/ProjetoHelloWorld/src/java/beans/OlaBean.java</file>
+            <file>file:/Users/adailtonlima/NetBeansProjects/ProjetoHelloWorld/web/index.xhtml</file>
+            <file>file:/Users/adailtonlima/NetBeansProjects/ProjetoHelloWorld/web/WEB-INF/web.xml</file>
+            <file>file:/Users/adailtonlima/NetBeansProjects/ProjetoHelloWorld/src/java/modelo/Animal.java</file>
+            <file>file:/Users/adailtonlima/NetBeansProjects/ProjetoHelloWorld/src/java/beans/CadCachorroBean.java</file>
         </group>
     </open-files>
 </project-private>

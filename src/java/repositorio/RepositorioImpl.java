@@ -37,9 +37,7 @@ public class RepositorioImpl<T> implements Repositorio<T> {
 	}
 
 	public void inserir(T entidade) {
-            System.out.println("repositorio.RepositorioImpl.inserir()  entidade = "+entidade);
-            System.out.println("repositorio.RepositorioImpl.inserir()  eManager = "+entityManager);
-	    entityManager.persist(entidade);
+            entityManager.persist(entidade);
 	}
 
 	@Override
