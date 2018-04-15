@@ -1,0 +1,283 @@
+entity Perfil {
+	inicio LocalDate,
+	diasTrial Integer,
+    vencimentoTrial LocalDate,
+    pago Boolean,
+    renovado Boolean
+}
+
+entity Plano {
+	nome String required,
+    descricao String required,
+    duracao Integer,
+    criacao LocalDate,
+    expira LocalDate,
+    valor Double required,
+    vencimento LocalDate
+}
+
+entity Vantagem {
+	nome String required,
+    descricao String required
+}
+
+entity PlanoPro {
+	nome String required,
+    valor Double required,
+    vencimento LocalDate
+}
+
+entity Pagamento {
+	valor Double required,
+    codTransacao String,
+    codConfirmacao String,
+    vencimento LocalDate,
+    dataConfirmacao ZonedDateTime
+}
+
+entity Categoria {
+	nome String required,
+    descricao String
+}
+
+entity Fabricante {
+	nome String required,
+    cnpj String,
+    site String,
+    descricao String
+}
+
+
+entity Loja {
+	nome String required,
+    cnpj String,  
+    site String,
+    responsavel String,
+    logradouro String, 
+    cep String,
+    email String,
+    telefone String,
+    latitude String,
+    longitude String,    
+    cadastro LocalDate
+}
+
+entity Arquivo {
+	filePath String required,
+    nome String required,
+    extensao String,
+    criado ZonedDateTime
+}
+
+entity CategoriaServico {
+    nome String required,    
+    descricao String,
+    icone String      
+}
+
+entity Servico {
+    nome String required,    
+    descricao String,
+    latitude Double,
+    longitude Double,
+    cadastro LocalDate,
+    ativo Boolean,
+    telefone String,
+    email String,
+    endereco String,
+    vinteQuatroHoras Boolean,
+    horaInicio Long,
+    horaFim Long
+}
+
+
+
+
+entity Administrador {
+    atribuicoes String required,
+    bloqueado Boolean,
+    nome String required,
+    sobrenome String,
+    login String required,
+    senha String required,
+    email String required
+}
+
+
+entity Usuario {
+	nome String required,
+    sobrenome String,
+    login String required,
+    senha String required,
+    email String required,
+    empresa String,
+    telefone String,
+    whatsapp Boolean,
+    cpf String,
+    visualizouTutorial Boolean required,
+    concordouComTermos Boolean required,
+    cep String,
+    logradouro String required,
+    referencia String,
+    numero Integer
+    dataCadastro LocalDate,  
+    ultimoLogin ZonedDateTime
+}
+
+entity Anuncio {
+    descricao String required,
+	titulo String required,
+    modelo String,
+    tipo TipoVeiculo,
+    kilometragem Long,
+    ano String,
+    cor String,
+    moeda Moeda,
+    preco Double,
+    valorEstimado Double,
+    cadastro LocalDate,
+    validade LocalDate,
+    novo Boolean,
+    vendido Boolean
+}
+
+entity Compra {
+    data LocalDate required,
+	comentario String required,
+    prazo Integer required,
+    preco Float,
+    chegada LocalDate
+}
+
+enum Moeda{
+	REAL, DOLAR, EURO, YUAN, BITCOIN
+}
+
+
+enum TipoVeiculo{
+	CARRO, MOTO, CAMINHAO, BARCO
+}
+
+
+entity Lista {
+    data ZonedDateTime required,
+	objetivo String required
+}
+
+entity AnuncioNaLista {
+    data ZonedDateTime required,
+    comprado Boolean
+}
+
+entity Chat {
+    dataCriacao LocalDate
+}
+
+entity Negociacao {
+    dataCriacao LocalDate
+}
+
+entity Mensagem {
+    texto String,
+    dataEnvio ZonedDateTime
+}
+
+entity Notificacao {
+    texto String,
+    tipo TipoNotificacao,
+    dataEnvio ZonedDateTime,
+    expiracao ZonedDateTime
+}
+
+enum TipoNotificacao {
+    PRODUTO, COTACAO, GERAL
+}
+
+entity AvaliacaoAnuncio {
+    texto String,
+    pontuacao Integer,
+    dataEnvio ZonedDateTime
+}
+
+entity AvaliacaoFabricante {
+    texto String,
+    pontuacao Integer,
+    dataEnvio ZonedDateTime
+}
+
+entity RedesSociais {
+	facebook String,
+    twitter String,
+    instagram String,
+    linkedin String
+}
+
+entity Cidade {
+	nome String required,
+    sigla String
+}
+
+entity Estado {
+	nome String required,
+    sigla String
+}
+
+relationship OneToOne {
+	Perfil{planoPro(nome)} to PlanoPro{perfil},
+    Loja{logo} to Arquivo,
+    Usuario{foto} to Arquivo,
+    Usuario{user(login)} to User,
+    Administrador{user(login)} to User,
+    Fabricante{logo} to Arquivo,
+    Usuario{perfil} to Perfil{usuario(nome)},
+    Usuario{redesSociais} to RedesSociais,
+    Chat{anuncio(titulo)} to Anuncio{chat},
+    Chat{categoria(nome)} to Categoria{chat}
+    Chat{fabricante(nome)} to Fabricante{chat}
+}
+
+relationship ManyToOne {
+	Anuncio{fabricante(nome)} to Fabricante{anuncios(nome)},
+    AnuncioNaLista{anuncio(titulo)} to Anuncio,    
+    Negociacao{anuncio(titulo)} to Anuncio{negociacoes},
+    Negociacao{usuario(nome)} to Usuario{negociacoes},
+    Anuncio{loja(nome)} to Loja{anuncios(titulo)},
+    AvaliacaoAnuncio{anuncio(titulo)} to Anuncio,
+    AvaliacaoFabricante{fabricante(nome)} to Fabricante,
+    Mensagem{usuario(nome)} to Usuario{mensagens}    
+}
+
+relationship ManyToMany {
+    Plano{vantagens(nome)} to Vantagem{planos(nome)},
+    CategoriaServico{servicos(nome)} to Servico{categorias(nome)},
+    Loja{estadosAtendidos(nome)} to Estado,
+    Usuario{fabricantesFavoritos(nome)} to Fabricante{favoritadoPor(nome)},
+    Usuario{anunciosFavoritos(nome)} to Anuncio{favoritadoPor(nome)},
+    Usuario{listas(objetivo)} to Lista{seguidores(nome)},
+    Anuncio{categorias(nome)} to Categoria{produtos(nome)},
+    Plano{planosPro(nome)} to PlanoPro{planos(nome)}
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	PlanoPro{pagamentos(vencimento)} to Pagamento{planoPro(nome)},
+    Chat{mensagens} to Mensagem{chat},
+    Negociacao{mensagens} to Mensagem{negociacao},
+    Administrador{notificacoes(texto)} to Notificacao{administrador},
+    Lista{compras(comentario)} to Compra{lista},
+    Anuncio{imagens(nome)} to Arquivo,
+    Servico{imagens(nome)} to Arquivo,
+    Lista{anuncios(titulo)} to AnuncioNaLista{lista},
+    Usuario{listas(objetivo)} to Lista{usuario(nome)},
+    Cidade to Usuario{cidade(nome)},
+    Usuario{lojas(nome)} to Loja{usuario(nome)},
+    Usuario{avaliacoesAnuncio(texto)} to AvaliacaoAnuncio{usuario(nome)},
+    Usuario{avaliacoesFabricante(texto)} to AvaliacaoFabricante{usuario(nome)},
+    Plano to Usuario{planoInicial(nome)},
+    Estado{cidades(nome)} to Cidade{estado(nome)}
+}
+// Set pagination options
+paginate * with pagination
+dto * with mapstruct
+service all with serviceImpl
+filter * 
